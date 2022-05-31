@@ -5,7 +5,7 @@ info:
 paths:
   "/users":
     get:
-      summary: Users
+      summary: Get Users
       operationId: read_item_users_get
       parameters:
         - in: query
@@ -79,6 +79,234 @@ paths:
                 $ref: '#/components/schemas/ValidationError'
       tags:
       - Users
+  
+  "/products":
+    get:
+      summary: Get Products
+      operationId: read_item_products_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductsResponse'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Products
+    post:
+      summary: Create Product
+      operationId: create_product_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductPost'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Products
+
+  "/products/filter":
+    get:
+      summary: Get Products Filtered
+      operationId: read_item_products_filtered_get
+      parameters:
+        - in: query
+          name: description
+          required: true
+          schema:
+            type: string
+          example: Banana
+          description: The description to be filtered
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductsResponse'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Products
+
+  "/products/{id}":
+    put:
+      summary: Update Product
+      operationId: update_product_put
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 7c862749-d5f2-4c66-b37e-65dd4eee73ec
+          description: The id to delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductPost'
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductResponse'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Products
+    delete:
+      operationId: delete_product
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 7c862749-d5f2-4c66-b37e-65dd4eee73ec
+          description: The id to delete
+      responses:
+        '204':
+          description: Successful Response
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Products
+  
+  "/shopping-lists":
+    get:
+      summary: Get Shopping Lists
+      operationId: read_item_shopping_list_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShoppingListsResponse'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Shopping List
+    post:
+      summary: Create Shopping List
+      operationId: create_shopping_list_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShoppingListPost'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShoppingListResponse'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Shopping List
+
+  "/shopping-lists/{id}":
+    delete:
+      operationId: delete_shopping_list
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 7c862749-d5f2-4c66-b37e-65dd4eee73ec
+          description: The id to delete
+      responses:
+        '204':
+          description: Successful Response
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Shopping List
+  
+  "/shopping-lists/{id}/description":
+    patch:
+      summary: Update Shopping List Description
+      operationId: update_shopping_list_patch
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 7c862749-d5f2-4c66-b37e-65dd4eee73ec
+          description: The id to delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShoppingListPatch'
+        required: true
+      responses:
+        '204':
+          description: Successful Response
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Shopping List
 
 components:
   schemas:
@@ -131,3 +359,136 @@ components:
       required:
         - email
         - phone
+
+    ProductResponse:
+      type: object
+      properties:
+        id:
+          title: Product Id
+          type: string
+          format: uuid
+        description:
+          title: Product Description
+          type: string
+        brand:
+          title: Product Brand
+          type: string
+        image:
+          title: Product Image
+          type: string
+      required:
+        - id
+        - description
+        - brand
+        - image
+    ProductsResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            title: Product Id
+            type: string
+            format: uuid
+          description:
+            title: Product Description
+            type: string
+          brand:
+            title: Product Brand
+            type: string
+          image:
+            title: Product Image
+            type: string
+      required:
+        - id
+        - description
+        - brand
+        - image
+    ProductPost:
+      type: object
+      properties:
+        description:
+          title: Product Description
+          type: string
+        brand:
+          title: Product Brand
+          type: string
+        image:
+          title: Product Image
+          type: string
+      required:
+        - description
+        - brand
+        - image
+    
+    ShoppingListResponse:
+      type: object
+      properties:
+        id:
+          title: Shopping List Id
+          type: string
+          format: uuid
+        user:
+          title: User Id
+          type: string
+          format: uuid
+        description:
+          title: Shopping List Description
+          type: string
+        total:
+          title: Shopping List Total
+          type: number
+      required:
+        - id
+        - user
+        - description
+        - total
+    ShoppingListsResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            title: Shopping List Id
+            type: string
+            format: uuid
+          user:
+            title: User Id
+            type: string
+            format: uuid
+          description:
+            title: Shopping List Description
+            type: string
+          total:
+            title: Shopping List Total
+            type: number
+        required:
+          - id
+          - user
+          - description
+          - total
+    ShoppingListPost:
+      type: object
+      properties:
+        user:
+          title: User Id
+          type: string
+          format: uuid
+        description:
+          title: Shopping List Description
+          type: string
+        total:
+          title: Shopping List Total
+          type: number
+      required:
+        - user
+        - description
+        - total
+    ShoppingListPatch:
+      type: object
+      properties:
+        description:
+          title: Shopping List Description
+          type: string
+      required:
+        - description
