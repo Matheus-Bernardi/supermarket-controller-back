@@ -1,0 +1,133 @@
+openapi: 3.0.0
+info:
+  title: Supermarket Controller
+  version: 0.1.0
+paths:
+  "/users":
+    get:
+      summary: Users
+      operationId: read_item_users_get
+      parameters:
+        - in: query
+          name: email
+          required: true
+          schema:
+            type: string
+            format: email
+          example: john.doe@gmail.com
+          description: The email for search
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Users
+    post:
+      summary: Create User
+      operationId: create_user_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserPost'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Users
+
+  "/users/{id}":
+    delete:
+      operationId: delete_user
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 7c862749-d5f2-4c66-b37e-65dd4eee73ec
+          description: The id to delete
+      responses:
+        '204':
+          description: Successful Response
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Users
+
+components:
+  schemas:
+    ValidationError:
+      required:
+        - statusCode
+        - message
+        - error
+      type: object
+      properties:
+        statusCode:
+          title: The HTTP status of error
+          type: number
+        message:
+          title: Error message
+          type: array
+          items:
+            type: string
+        error:
+          title: Error Type
+          type: string
+    UserResponse:
+      type: object
+      properties:
+        id:
+          title: User Id
+          type: string
+          format: uuid
+        email:
+          title: User Email
+          type: string
+          format: email
+        phone:
+          title: User Phone
+          type: string
+      required:
+        - id
+        - email
+        - phone
+    UserPost:
+      type: object
+      properties:
+        email:
+          title: User Email
+          type: string
+          format: email
+        phone:
+          title: User Phone
+          type: string
+      required:
+        - email
+        - phone
