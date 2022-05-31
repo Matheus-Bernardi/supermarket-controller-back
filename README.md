@@ -41,6 +41,19 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
+## Database
+
+```bash
+# run migrations
+$ npm run knex:migrate
+
+# undo migrations
+$ npm run knex:migrate:undo
+
+# run seeds
+$ npm run knex:seed
+```
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
