@@ -1,11 +1,9 @@
 import { Module } from '@nestjs/common';
 import { KnexModule } from 'nestjs-knex';
-import { EntryModule } from './entry/entry.module';
 import { CommonModule } from './common/common.module';
 import env from './app.env';
-import { CategoryModule } from './category/category.module';
-import { WalletModule } from './wallet/wallet.module';
 import { UserModule } from './users/user.module';
+import { ProductModule } from './products/product.module';
 
 @Module({
   imports: [
@@ -21,11 +19,9 @@ import { UserModule } from './users/user.module';
         },
       },
     }),
-    EntryModule,
     CommonModule,
-    CategoryModule,
-    WalletModule,
     UserModule,
+    ProductModule
   ],
   controllers: [],
   providers: [],
