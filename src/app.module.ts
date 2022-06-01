@@ -5,6 +5,7 @@ import env from './app.env';
 import { UserModule } from './users/user.module';
 import { ProductModule } from './products/product.module';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
+import { PurchaseItemsModule } from './purchase-items/purchase-items.module';
 
 @Module({
   imports: [
@@ -23,7 +24,8 @@ import { ShoppingListModule } from './shopping-list/shopping-list.module';
     CommonModule,
     UserModule,
     ProductModule,
-    ShoppingListModule
+    ShoppingListModule,
+    PurchaseItemsModule
   ],
   controllers: [],
   providers: [],
