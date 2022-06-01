@@ -6,6 +6,7 @@ import { UserModule } from './users/user.module';
 import { ProductModule } from './products/product.module';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { PurchaseItemsModule } from './purchase-items/purchase-items.module';
+import { ShoppingItemsModule } from './shopping-items/shopping-items.module';
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { PurchaseItemsModule } from './purchase-items/purchase-items.module';
     UserModule,
     ProductModule,
     ShoppingListModule,
-    PurchaseItemsModule
+    PurchaseItemsModule,
+    ShoppingItemsModule
   ],
   controllers: [],
   providers: [],

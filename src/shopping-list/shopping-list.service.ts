@@ -7,26 +7,26 @@ import { ShoppingListRepository } from './shopping-list.repository';
 export class ShoppingListService {
 
   constructor(
-    private shoppinglistRepository: ShoppingListRepository
+    private shoppingListRepository: ShoppingListRepository
   ) {}
 
   async getShoppingLists(): Promise<ShoppingList[]> {
-    return await this.shoppinglistRepository.selectShoppingLists();
+    return await this.shoppingListRepository.selectShoppingLists();
   }
 
-  async postShoppingList(shoppinglist: ShoppingListInput): Promise<ShoppingList> {
-    return await this.shoppinglistRepository.insertShoppingList(shoppinglist);
+  async postShoppingList(shoppingList: ShoppingListInput): Promise<ShoppingList> {
+    return await this.shoppingListRepository.insertShoppingList(shoppingList);
   }
   
   async patchShoppingListDescription(id: string, description: string): Promise<void> {
-    await this.shoppinglistRepository.updateShoppingListDescription(id, description);
+    await this.shoppingListRepository.updateShoppingListDescription(id, description);
   }
 
   async patchShoppingListTotal(id: string, total: number): Promise<void> {
-    await this.shoppinglistRepository.updateShoppingListTotal(id, total);
+    await this.shoppingListRepository.updateShoppingListTotal(id, total);
   }
 
   async deleteShoppingList(id: string): Promise<void> {
-    await this.shoppinglistRepository.deleteShoppingList(id);
+    await this.shoppingListRepository.deleteShoppingList(id);
   }
 }

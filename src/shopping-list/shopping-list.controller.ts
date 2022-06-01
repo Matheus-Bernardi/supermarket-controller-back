@@ -8,18 +8,18 @@ import { ShoppingListService } from './shopping-list.service';
 
 @Controller('/shopping-lists')
 export class ShoppingListController {
-  constructor(private readonly shoppinglistService: ShoppingListService) {}
+  constructor(private readonly shoppingListService: ShoppingListService) {}
     
   @Get()
   @TransformPlainToClass(ShoppingListDTO)
   async getShoppingLists(): Promise<ShoppingListDTO[]> {
-    return await this.shoppinglistService.getShoppingLists(); 
+    return await this.shoppingListService.getShoppingLists(); 
   }
 
   @Post()
   @TransformPlainToClass(ShoppingListDTO)
-  async postShoppingList(@Body() shoppinglist: ShoppingListInput): Promise<ShoppingListDTO> {
-    return await this.shoppinglistService.postShoppingList(shoppinglist);
+  async postShoppingList(@Body() shoppingList: ShoppingListInput): Promise<ShoppingListDTO> {
+    return await this.shoppingListService.postShoppingList(shoppingList);
   }
   
   @Patch('/:id/description')
@@ -28,14 +28,14 @@ export class ShoppingListController {
     @Param() { id }: IdInput,
     @Body() { description }: PatchShoppingListInput
   ): Promise<void> {
-    await this.shoppinglistService.patchShoppingListDescription(id, description);
+    await this.shoppingListService.patchShoppingListDescription(id, description);
   }
 
-  @Delete(':id')
+  @Delete('/:id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async deleteShoppingList(
     @Param() { id }: IdInput,
   ) {
-    return await this.shoppinglistService.deleteShoppingList(id);
+    return await this.shoppingListService.deleteShoppingList(id);
   }
 }

@@ -15,14 +15,14 @@ export class ShoppingListRepository {
     return await this.knex<ShoppingList>(SHOPPING_LIST_TABLE).select<ShoppingList[]>();
   }
 
-  async insertShoppingList(shoppinglistValues: ShoppingListInput): Promise<ShoppingList> {
-    const [shoppinglist] = await this.knex<ShoppingList>(SHOPPING_LIST_TABLE)
+  async insertShoppingList(shoppingListValues: ShoppingListInput): Promise<ShoppingList> {
+    const [shoppingList] = await this.knex<ShoppingList>(SHOPPING_LIST_TABLE)
       .insert({
-        ...shoppinglistValues,
+        ...shoppingListValues,
       })
       .returning('*');
 
-    return shoppinglist;
+    return shoppingList;
   }
 
   async updateShoppingListDescription(id: string, description: string): Promise<void> {

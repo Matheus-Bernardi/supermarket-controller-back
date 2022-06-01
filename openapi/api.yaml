@@ -308,6 +308,116 @@ paths:
       tags:
       - Shopping List
   
+  "/shopping-items/filter-by-list":
+    get:
+      summary: Get Shopping Items
+      operationId: read_item_shopping_items_get
+      parameters:
+      - in: query
+        name: id
+        required: true
+        schema:
+          type: string
+          format: uuid
+        example: 7c862749-d5f2-4c66-b37e-65dd4eee73ec
+        description: The list id for search
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShoppingItemsProductResponse'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Shopping Items
+  
+  "/shopping-items":
+    post:
+      summary: Create Shopping Items
+      operationId: create_shopping_items_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShoppingItemsPost'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShoppingItemsResponse'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Shopping Items
+
+  "/shopping-items/{id}":
+    delete:
+      operationId: delete_shopping_items
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 7c862749-d5f2-4c66-b37e-65dd4eee73ec
+          description: The id to delete
+      responses:
+        '204':
+          description: Successful Response
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Shopping Items
+  
+  "/shopping-items/{id}/expected-value":
+    patch:
+      summary: Update Shopping Items Expected Value
+      operationId: update_shopping_items_patch
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 7c862749-d5f2-4c66-b37e-65dd4eee73ec
+          description: The id to delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShoppingItemsPatch'
+        required: true
+      responses:
+        '204':
+          description: Successful Response
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Shopping Items
+  
   "/purchase-items":
     get:
       summary: Get Purchased Items
@@ -560,6 +670,95 @@ components:
           type: string
       required:
         - description
+    
+    ShoppingItemsResponse:
+      type: object
+      properties:
+        id:
+          title: Shopping List Id
+          type: string
+          format: uuid
+        list:
+          title: List Id
+          type: string
+          format: uuid
+        product:
+          title: Product Id
+          type: string
+          format: uuid
+        expectedValue:
+          title: Shopping Item Expected Value
+          type: number
+      required:
+        - id
+        - list
+        - product
+        - expectedValue
+    ShoppingItemsProductResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            title: Shopping List Id
+            type: string
+            format: uuid
+          list:
+            title: List Id
+            type: string
+            format: uuid
+          product:
+            title: Product Id
+            type: string
+            format: uuid
+          expectedValue:
+            title: Shopping Item Expected Value
+            type: number
+          description:
+            title: Product Description
+            type: string
+          brand:
+            title: Product Brand
+            type: string
+          image:
+            title: Product image
+            type: string
+        required:
+          - id
+          - list
+          - product
+          - expectedValue
+          - description
+          - brand
+          - image
+    ShoppingItemsPost:
+      type: array
+      items:
+        type: object
+        properties:
+          list:
+            title: List Id
+            type: string
+            format: uuid
+          product:
+            title: Product Id
+            type: string
+            format: uuid
+          expectedValue:
+            title: Shopping Item Expected Value
+            type: number
+        required:
+          - list
+          - product
+          - expectedValue
+    ShoppingItemsPatch:
+      type: object
+      properties:
+        expectedValue:
+          title: Shopping Items Expected Value
+          type: string
+      required:
+        - expectedValue
     
     PurchaseItemResponse:
       type: object
