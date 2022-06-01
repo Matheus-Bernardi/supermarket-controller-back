@@ -307,6 +307,74 @@ paths:
                 $ref: '#/components/schemas/ValidationError'
       tags:
       - Shopping List
+  
+  "/purchase-items":
+    get:
+      summary: Get Purchased Items
+      operationId: read_item_purchase_items_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseItemsResponse'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Purchase Items
+    post:
+      summary: Create Purchased Item
+      operationId: create_purchase_item_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseItemPost'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PurchaseItemResponse'
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Purchase Items
+
+  "/purchase-items/{id}":
+    delete:
+      operationId: delete_purchase_items
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            format: uuid
+          example: 7c862749-d5f2-4c66-b37e-65dd4eee73ec
+          description: The id to delete
+      responses:
+        '204':
+          description: Successful Response
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      tags:
+      - Purchase Items
 
 components:
   schemas:
@@ -492,3 +560,82 @@ components:
           type: string
       required:
         - description
+    
+    PurchaseItemResponse:
+      type: object
+      properties:
+        id:
+          title: Purchase Item Id
+          type: string
+          format: uuid
+        user:
+          title: User Id
+          type: string
+          format: uuid
+        product:
+          title: Product Id
+          type: string
+        value:
+          title: Purchased Item Value
+          type: number
+        purchaseDate:
+          title: Purchased Item Date
+          type: string
+          format: date-time
+      required:
+        - id
+        - user
+        - product
+        - value
+        - purchaseDate
+    PurchaseItemsResponse:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            title: Purchase Item Id
+            type: string
+            format: uuid
+          user:
+            title: User Id
+            type: string
+            format: uuid
+          product:
+            title: Product Id
+            type: string
+          value:
+            title: Purchased Item Value
+            type: number
+          purchaseDate:
+            title: Purchased Item Date
+            type: string
+            format: date-time
+        required:
+          - id
+          - user
+          - product
+          - value
+          - purchaseDate
+    PurchaseItemPost:
+      type: object
+      properties:
+        user:
+          title: User Id
+          type: string
+          format: uuid
+        product:
+          title: Product Id
+          type: string
+        value:
+          title: Purchased Item Value
+          type: number
+        purchaseDate:
+          title: Purchased Item Date
+          type: string
+          format: date-time
+      required:
+        - id
+        - user
+        - product
+        - value
