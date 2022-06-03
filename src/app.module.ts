@@ -7,6 +7,7 @@ import { ProductModule } from './products/product.module';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { PurchaseItemsModule } from './purchase-items/purchase-items.module';
 import { ShoppingItemsModule } from './shopping-items/shopping-items.module';
+import { HealthModule } from './health/health.module';
 
 @Module({
   imports: [
@@ -22,12 +23,13 @@ import { ShoppingItemsModule } from './shopping-items/shopping-items.module';
         },
       },
     }),
+    HealthModule,
     CommonModule,
     UserModule,
     ProductModule,
     ShoppingListModule,
     PurchaseItemsModule,
-    ShoppingItemsModule
+    ShoppingItemsModule,
   ],
   controllers: [],
   providers: [],

@@ -54,6 +54,33 @@ $ npm run knex:migrate:undo
 $ npm run knex:seed
 ```
 
+## Docker Compose
+
+### Run with docker
+
+```bash
+# Create network
+docker network create services
+```
+```bash
+# Install dependencies
+docker-compose run --rm node npm i
+```
+```bash
+# Run migrations
+docker-compose run --rm node npm run knex:migrate
+```
+```bash
+# Run seeds
+docker-compose run --rm node npm run knex:seed
+```
+```bash
+# Run Project
+docker-compose up
+```
+
+
+
 ## Support
 
 Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
