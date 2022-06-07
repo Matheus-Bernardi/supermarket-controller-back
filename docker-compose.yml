@@ -29,20 +29,17 @@ services:
   database:
     hostname: supermarket-controller-database
     image: postgres:13-alpine
-    restart: unless-stopped
+    restart: always
     networks:
       - main
       - services
     ports:
-      - "5432:5432"
+      - "5434:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
-      - ./docker/database/entrypoints:/docker-entrypoint-initdb.d
-      # - ./db/init.sql:/docker-entrypoint-initdb.d/create_tables.sql
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DATABASES=${DATABASE} # comma separated list of databases
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
 
 volumes:
   db-data:
