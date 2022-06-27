@@ -1,14 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { User } from './entities/user.entity';
-import { InjectKnex, Knex } from 'nestjs-knex';
-import { USER_TABLE } from '../constants';
+import { Knex } from 'knex';
+import { KNEX_TOKEN, USER_TABLE } from '../constants';
 import { UserInput } from './dto/user-input.dto';
 
 @Injectable()
 export class UserRepository {
 
   constructor(
-    @InjectKnex() private readonly knex: Knex,
+    @Inject(KNEX_TOKEN) private readonly knex: Knex,
   ) {}
   
   async selectUserByEmail(email: string): Promise<User | null> {

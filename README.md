@@ -75,6 +75,14 @@ docker-compose run --rm node npm run knex:migrate
 docker-compose run --rm node npm run knex:seed
 ```
 ```bash
+# Run tests
+docker-compose run --rm node npm run test
+```
+```bash
+# Run tests coverage
+docker-compose run --rm node npm run test:cov
+```
+```bash
 # Run Project
 docker-compose up
 ```

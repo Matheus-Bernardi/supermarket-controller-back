@@ -1,3 +1,4 @@
+export const KNEX_TOKEN = 'KNEX';
 export const USER_TABLE = 'users';
 export const SHOPPING_LIST_TABLE = 'shopping_list';
 export const PRODUCT_TABLE = 'product';

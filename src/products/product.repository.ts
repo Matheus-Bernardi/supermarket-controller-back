@@ -1,14 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Product } from './entities/product.entity';
-import { InjectKnex, Knex } from 'nestjs-knex';
-import { PRODUCT_TABLE } from '../constants';
+import { Knex } from 'knex';
+import { KNEX_TOKEN, PRODUCT_TABLE } from '../constants';
 import { ProductInput } from './dto/product-input.dto';
 
 @Injectable()
 export class ProductRepository {
 
   constructor(
-    @InjectKnex() private readonly knex: Knex,
+    @Inject(KNEX_TOKEN) private readonly knex: Knex,
   ) {}
   
   async selectProducts(): Promise<Product[] | null> {

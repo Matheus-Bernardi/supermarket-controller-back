@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ShoppingItems } from './entities/shopping-items.entity';
-import { InjectKnex, Knex } from 'nestjs-knex';
-import { PRODUCT_TABLE, SHOPPING_ITEMS_TABLE } from '../constants';
+import { Knex } from 'knex';
+import { KNEX_TOKEN, PRODUCT_TABLE, SHOPPING_ITEMS_TABLE } from '../constants';
 import { ShoppingItemsInput } from './dto/shopping-items-input.dto';
 import { ShoppingItemsProduct } from './entities/shopping-itemsProduct.entity';
 
@@ -9,7 +9,7 @@ import { ShoppingItemsProduct } from './entities/shopping-itemsProduct.entity';
 export class ShoppingItemsRepository {
 
   constructor(
-    @InjectKnex() private readonly knex: Knex,
+    @Inject(KNEX_TOKEN) private readonly knex: Knex,
   ) {}
   
   async selectShoppingItemsByListId(listId: string): Promise<ShoppingItemsProduct[]> {
