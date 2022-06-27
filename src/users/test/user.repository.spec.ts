@@ -5,7 +5,7 @@ import { Knex } from 'nestjs-knex';
 import * as sinon from 'sinon';
 import { KNEX_TOKEN } from '../../constants';
 import knexConfigs from '../../database/knexfile';
-import { UserRepository } from '../user.repository';
+import { UserRepository } from '../users.repository';
 import { UserEntityHelper } from './helpers/user.entity.helper';
 
 describe('Users repository', () => {

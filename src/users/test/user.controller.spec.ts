@@ -4,11 +4,11 @@ import { assert } from 'chai';
 import 'reflect-metadata';
 import * as sinon from 'sinon';
 import * as request from 'supertest';
-import { UserService } from '../user.service';
+import { UserService } from '../users.service';
 import { UserEntityHelper } from './helpers/user.entity.helper';
 import { UserInputHelper } from './helpers/create-user.dto.helper';
 import { UserDTO } from '../dto/user.dto';
-import { UserController } from '../user.controller';
+import { UserController } from '../users.controller';
 
 describe('User controller', () => {
   const matchFields = (actualUser: UserDTO, expectedUser: UserDTO): void => {

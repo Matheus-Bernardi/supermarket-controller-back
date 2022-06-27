@@ -4,7 +4,7 @@ import { IdInput } from '../common/dto/id-input.dto';
 import { GetUserInput } from './dto/getUser-input.dto';
 import { UserInput } from './dto/user-input.dto';
 import { UserDTO } from './dto/user.dto';
-import { UserService } from './user.service';
+import { UserService } from './users.service';
 
 @Controller('/users')
 export class UserController {

@@ -4,7 +4,7 @@ import { IdInput } from '../common/dto/id-input.dto';
 import { GetProductInput } from './dto/getProduct-input.dto';
 import { ProductInput } from './dto/product-input.dto';
 import { ProductDTO } from './dto/product.dto';
-import { ProductService } from './product.service';
+import { ProductService } from './products.service';
 
 @Controller('/products')
 export class ProductController {

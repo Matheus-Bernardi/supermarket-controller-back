@@ -2,10 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { assert } from 'chai';
 import 'reflect-metadata';
 import * as sinon from 'sinon';
-import { UserService } from '../user.service';
+import { UserService } from '../users.service';
 import { UserEntityHelper } from './helpers/user.entity.helper';
 import { UserInputHelper } from './helpers/create-user.dto.helper';
-import { UserRepository } from '../user.repository';
+import { UserRepository } from '../users.repository';
 
 describe('Users service', () => {
   const userRepository = sinon.createStubInstance(UserRepository);
